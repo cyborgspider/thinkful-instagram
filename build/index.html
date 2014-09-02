@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="InstangularApp">
+  <head>
+    <title>Thinkful Instagram</title>
+    <link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <div ng-controller="instagramFetchCtrl" class="container">
+      <h1>Instangular </h1>
+      <form ng-submit="fetchPhotos()" novalidate name="instaForm" class="input-wrap">
+        <input type="text" ng-model="tag" required name="tag">
+        <input type="submit" value="Search Tags" class="button">
+      </form>
+      <p ng-if="invalidForm">Please search for an Instagram tag.</p>
+      <p ng-if="nothingReturned">Sorry, there were no images found with these tags, or they are inappropriate. Try another tag.</p>
+      <p ng-if="errorFetching">Sorry, there was an error with the search. Please try again.</p>
+      <p ng-if="picturesReceived">We found {{ picturesReceived.length }} results for {{ tag }}.</p>
+      <ul ng-show="fetchPhotos" class="results-list">
+        <li ng-repeat="picture in picturesReceived"><a ng-href="{{ picture.link }}"><img ng-src="{{ picture.images.thumbnail.url }}" alt="{{ picture.caption.text}}"></a></li>
+      </ul>
+    </div>
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-animate.js"></script>
+    <script src="js/InstangularApp.js"></script>
+  </body>
+</html>
