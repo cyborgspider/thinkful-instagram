@@ -12,10 +12,12 @@
         <input type="text" ng-model="tag" required name="tag">
         <input type="submit" value="Search Tags" class="button">
       </form>
+      <p ng-if="searchInProgress">Searching Instagram for photos tagged with {{ tag }}.</p>
       <p ng-if="invalidForm">Please search for an Instagram tag.</p>
-      <p ng-if="nothingReturned">Sorry, there were no images found with these tags, or they are inappropriate. Try another tag.</p>
+      <p ng-if="inappropriateTag">Sorry, this tag is deemed inappropriate by Instagram. Try another tag.</p>
+      <p ng-if="noPictures">We found 0 results for {{ cachedTag }}</p>
       <p ng-if="errorFetching">Sorry, there was an error with the search. Please try again.</p>
-      <p ng-if="picturesReceived">We found {{ picturesReceived.length }} results for {{ tag }}.</p>
+      <p ng-if="picturesReceived">We found {{ picturesReceived.length }} results for {{ cachedTag }}.</p>
       <ul ng-show="fetchPhotos" class="results-list">
         <li ng-repeat="picture in picturesReceived"><a ng-href="{{ picture.link }}"><img ng-src="{{ picture.images.thumbnail.url }}" alt="{{ picture.caption.text}}"></a></li>
       </ul>

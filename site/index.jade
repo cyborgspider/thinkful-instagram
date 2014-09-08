@@ -11,11 +11,12 @@ html(ng-app="InstangularApp")
         input(type="text", ng-model="tag", required, name="tag")
         input.button(type="submit", value="Search Tags") Search Tags
 
-      //- p Searching Instagram for photos tagged with {{ tag }}. #Note to Jon, can't make this work, not sure what to do.
+      p(ng-if="searchInProgress") Searching Instagram for photos tagged with {{ tag }}.
       p(ng-if="invalidForm") Please search for an Instagram tag.
-      p(ng-if="nothingReturned") Sorry, there were no images found with these tags, or they are inappropriate. Try another tag.
+      p(ng-if="inappropriateTag") Sorry, this tag is deemed inappropriate by Instagram. Try another tag.
+      p(ng-if="noPictures") We found 0 results for {{ cachedTag }}
       p(ng-if="errorFetching") Sorry, there was an error with the search. Please try again.
-      p(ng-if="picturesReceived") We found {{ picturesReceived.length }} results for {{ tag }}.
+      p(ng-if="picturesReceived") We found {{ picturesReceived.length }} results for {{ cachedTag }}.
 
       ul.results-list(ng-show="fetchPhotos")
         li(ng-repeat="picture in picturesReceived")
